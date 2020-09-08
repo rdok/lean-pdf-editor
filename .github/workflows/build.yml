@@ -1,0 +1,9 @@
+name: Build
+on:
+  push:
+jobs:
+  build-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - run: make install ci.lint ci.test ci.build
