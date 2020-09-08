@@ -4,9 +4,7 @@
 This project makes simple PDF editing. It removes page ranges, and adds bookmarks to a page.
 
 ###### Why
-At the time of this writing, current PDF software editors, are either [really expensive $90+](https://www.tracker-software.com/product/pdf-xchange-pro), or do not provide these features, e.g. [luminpdf](https://www.luminpdf.com/)
-
-This project aims for users who just want to edit personal PDF, and not in business perspective.
+At the time of this writing, current PDF software editors, are either [really expensive $90+](https://www.tracker-software.com/product/pdf-xchange-pro), or do not provide these features, e.g. [luminpdf](https://www.luminpdf.com/) This project aims for users who just want to make a simple one of change.
 
 
 ## Start
