@@ -6,7 +6,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - run: make install
-      - run: make ci.lint
-      - run: make ci.test
-      - run: make ci.build
+      - run: yarn
+      - run: yarn build
