@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "https://rdok.github.io/lean-pdf-editor/static/css/main.11972637.chunk.css",
-    "main.js": "https://rdok.github.io/lean-pdf-editor/static/js/main.bd411b19.chunk.js",
-    "main.js.map": "https://rdok.github.io/lean-pdf-editor/static/js/main.bd411b19.chunk.js.map",
+    "main.css": "https://rdok.github.io/lean-pdf-editor/static/css/main.bb114e6b.chunk.css",
+    "main.js": "https://rdok.github.io/lean-pdf-editor/static/js/main.ee1be139.chunk.js",
+    "main.js.map": "https://rdok.github.io/lean-pdf-editor/static/js/main.ee1be139.chunk.js.map",
     "runtime-main.js": "https://rdok.github.io/lean-pdf-editor/static/js/runtime-main.6cb0c5c0.js",
     "runtime-main.js.map": "https://rdok.github.io/lean-pdf-editor/static/js/runtime-main.6cb0c5c0.js.map",
     "static/css/2.59815e44.chunk.css": "https://rdok.github.io/lean-pdf-editor/static/css/2.59815e44.chunk.css",
-    "static/js/2.7e53d780.chunk.js": "https://rdok.github.io/lean-pdf-editor/static/js/2.7e53d780.chunk.js",
-    "static/js/2.7e53d780.chunk.js.map": "https://rdok.github.io/lean-pdf-editor/static/js/2.7e53d780.chunk.js.map",
+    "static/js/2.c1fe3801.chunk.js": "https://rdok.github.io/lean-pdf-editor/static/js/2.c1fe3801.chunk.js",
+    "static/js/2.c1fe3801.chunk.js.map": "https://rdok.github.io/lean-pdf-editor/static/js/2.c1fe3801.chunk.js.map",
     "index.html": "https://rdok.github.io/lean-pdf-editor/index.html",
-    "precache-manifest.d89b0cd9200b59286088e7480c864f52.js": "https://rdok.github.io/lean-pdf-editor/precache-manifest.d89b0cd9200b59286088e7480c864f52.js",
+    "precache-manifest.1a75f30f45db96d0ac02687f7a1054f5.js": "https://rdok.github.io/lean-pdf-editor/precache-manifest.1a75f30f45db96d0ac02687f7a1054f5.js",
     "service-worker.js": "https://rdok.github.io/lean-pdf-editor/service-worker.js",
     "static/css/2.59815e44.chunk.css.map": "https://rdok.github.io/lean-pdf-editor/static/css/2.59815e44.chunk.css.map",
-    "static/css/main.11972637.chunk.css.map": "https://rdok.github.io/lean-pdf-editor/static/css/main.11972637.chunk.css.map",
-    "static/js/2.7e53d780.chunk.js.LICENSE.txt": "https://rdok.github.io/lean-pdf-editor/static/js/2.7e53d780.chunk.js.LICENSE.txt",
+    "static/css/main.bb114e6b.chunk.css.map": "https://rdok.github.io/lean-pdf-editor/static/css/main.bb114e6b.chunk.css.map",
+    "static/js/2.c1fe3801.chunk.js.LICENSE.txt": "https://rdok.github.io/lean-pdf-editor/static/js/2.c1fe3801.chunk.js.LICENSE.txt",
     "static/js/pdf.worker.entry.0d620650.worker.js": "https://rdok.github.io/lean-pdf-editor/static/js/pdf.worker.entry.0d620650.worker.js",
     "static/js/pdf.worker.entry.0d620650.worker.js.LICENSE.txt": "https://rdok.github.io/lean-pdf-editor/static/js/pdf.worker.entry.0d620650.worker.js.LICENSE.txt",
     "static/js/pdf.worker.entry.0d620650.worker.js.map": "https://rdok.github.io/lean-pdf-editor/static/js/pdf.worker.entry.0d620650.worker.js.map"
@@ -21,8 +21,8 @@
   "entrypoints": [
     "static/js/runtime-main.6cb0c5c0.js",
     "static/css/2.59815e44.chunk.css",
-    "static/js/2.7e53d780.chunk.js",
-    "static/css/main.11972637.chunk.css",
-    "static/js/main.bd411b19.chunk.js"
+    "static/js/2.c1fe3801.chunk.js",
+    "static/css/main.bb114e6b.chunk.css",
+    "static/js/main.ee1be139.chunk.js"
   ]
 }
