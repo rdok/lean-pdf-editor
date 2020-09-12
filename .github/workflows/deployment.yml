@@ -9,8 +9,7 @@ jobs:
       - uses: actions/checkout@v2
       - run: yarn
       - run: yarn build
-      - name: Publish
+      - name: Publish GitHub Page
         uses: rdok/publish-gh-page-action@v1.2.1
         with:
           directory: build
-          github-token: ${{ github.token }}
