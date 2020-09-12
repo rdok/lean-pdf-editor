@@ -1,5 +1,6 @@
 # Lean PDF Editor
-[![Build](https://github.com/rdok/lean-pdf-editor/workflows/Build/badge.svg)](https://github.com/rdok/lean-pdf-editor/actions?query=workflow%3ABuild)
+[![Production](https://img.shields.io/badge/Web-Prod-blue?style=flat-square&logo=react)](https://rdok.github.io/lean-pdf-editor/)
+[![Deployment](https://github.com/rdok/lean-pdf-editor/workflows/Deployment/badge.svg)](https://github.com/rdok/lean-pdf-editor/actions?query=workflow%3ADeployment)
 
 This project makes simple PDF editing. It bookmarks pages, and removes page ranges.
 
