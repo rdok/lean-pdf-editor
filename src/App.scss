@@ -1,22 +1,24 @@
-body {
-  margin: 0;
-  background-color: rgb(82, 86, 89);
-  font-family: Segoe UI, Tahoma, sans-serif;
-}
+@import "~bootstrap/scss/bootstrap";
 
-header {
-  background-color: rgb(50, 54, 57);
-  box-shadow: 0 0 8px rgba(0, 0, 0, .5);
-  padding: 20px;
-  color: white;
-
-  h1 {
-    font-size: inherit;
-    margin: 0;
-  }
-}
-
-.Content {
-  display: flex;
-  margin: 1em 0;
-}
+//body {
+//  margin: 0;
+//  background-color: rgb(82, 86, 89);
+//  font-family: Segoe UI, Tahoma, sans-serif;
+//}
+//
+//header {
+//  background-color: rgb(50, 54, 57);
+//  box-shadow: 0 0 8px rgba(0, 0, 0, .5);
+//  padding: 20px;
+//  color: white;
+//
+//  h1 {
+//    font-size: inherit;
+//    margin: 0;
+//  }
+//}
+//
+//.Content {
+//  display: flex;
+//  margin: 1em 0;
+//}
