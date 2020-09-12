@@ -10,6 +10,6 @@ jobs:
       - run: yarn
       - run: yarn build
       - name: Publish GitHub Page
-        uses: rdok/publish-gh-page-action@v1.2.1
+        uses: rdok/publish-gh-page-action@v1.2.2
         with:
           directory: build
