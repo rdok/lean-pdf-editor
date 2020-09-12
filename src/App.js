@@ -43,13 +43,9 @@ export default class App extends React.Component {
 
   async handleFileAttached(e) {
     const newFile = e.target.files[0];
-    const content = await newFile.arrayBuffer();
-    const name = newFile.name;
-    const file = { name, content };
-    this.setState({ file });
-    // console.log('loading file')
-    // this.setState({ file });
-    // console.log('file changed')
+    const name = newFile.name
+    const data = await newFile.arrayBuffer();
+    this.setState({ file: { name, data } });
     // const filename = file.name;
     // const contents = await file.arrayBuffer();
     // const pdfDoc = await PDFDocument.load(contents);
