@@ -15,7 +15,9 @@ jobs:
           export PUBLIC_URL="https://${OWNER}.github.io/${REPO}/"
           yarn build
       - name: Publish
-        uses: rdok/publish-gh-page-action@v1.0.3
+        uses: rdok/publish-gh-page-action@v1.1.0
         with:
           directory: build
+          github-actor: ${{ github.actor }}
           github-token: ${{ github.token }}
+          github-repository: ${{ github.repository }}
