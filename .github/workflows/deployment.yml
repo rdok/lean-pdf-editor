@@ -19,3 +19,4 @@ jobs:
         with:
           directory: build
           github-token: ${{ github.token }}
+          github-repository: ${{ github.repository }}
