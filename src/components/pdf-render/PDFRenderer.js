@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Document, Page } from 'react-pdf/dist/umd/entry.webpack';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 
@@ -6,7 +6,6 @@ import './PDFRenderer.scss';
 
 export default class PDFRenderer extends Component {
   state = {
-    file: './sample.pdf',
     numPages: null,
   };
 
@@ -21,7 +20,7 @@ export default class PDFRenderer extends Component {
   };
 
   render() {
-    const { file, numPages } = this.state;
+    const { numPages } = this.state;
 
     return (
       <div className="PDFRenderer">
@@ -35,7 +34,7 @@ export default class PDFRenderer extends Component {
           {/*</div>*/}
           <div className="PDFRenderer__container__document">
             <Document
-              file={file}
+              file={this.props.pdf}
               onLoadSuccess={this.onDocumentLoadSuccess}
             >
               {

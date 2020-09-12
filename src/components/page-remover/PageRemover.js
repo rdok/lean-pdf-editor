@@ -4,28 +4,34 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import React, { useState } from "react";
 
-export default () => {
+export default ({ pdfDoc, onPdfDocChange }) => {
   const [validated, setValidated] = useState(false);
-  const [startPage, setStartPage] = useState(0);
-  const [endPage, setEndPage] = useState(0);
+  const [startPage, setStartPage] = useState(1);
+  const [endPage, setEndPage] = useState(1);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
     const formIsValid = form.checkValidity() === true;
     setValidated(true);
 
     if (formIsValid) {
-      console.log('startPage', startPage);
-      console.log('endPage', endPage);
+      let index = startPage - 1;
+      do {
+        pdfDoc.removePage(index);
+        index++;
+      } while (startPage < endPage);
+
+      onPdfDocChange(pdfDoc)
     }
   };
 
-  function handlePageStartChange({target}) {
-   setStartPage(target.value)
+  function handlePageStartChange({ target }) {
+    setStartPage(target.value);
   }
-  function handlePageEndChange({target}) {
-    setEndPage(target.value)
+
+  function handlePageEndChange({ target }) {
+    setEndPage(target.value);
   }
 
   return (
@@ -35,7 +41,7 @@ export default () => {
         <Col>
           <Form.Control
             type="number"
-            min="0"
+            min="1"
             placeholder="Page start"
             value={startPage}
             onChange={handlePageStartChange}
@@ -44,7 +50,7 @@ export default () => {
         <Col>
           <Form.Control
             type="number"
-            min="0"
+            min="1"
             value={endPage}
             onChange={handlePageEndChange}
             placeholder="Page end"

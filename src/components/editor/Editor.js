@@ -1,36 +1,32 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import downloadjs from "downloadjs";
-
-import ModifyPDF from "../modify-page";
 
 import './Editor.scss';
 import PageRemover from "../page-remover/PageRemover";
 import Outliner from "../outliner/Outliner";
 
-export default class Editor extends Component {
+export default ({ pdfDoc, onPdfDocChange }) => {
 
-  async handleDownload(e) {
-    const pdf = await ModifyPDF();
-    downloadjs(pdf, "lean-pdf.pdf", "application/pdf");
-  }
+  const handleDownload = async (e) => {
+    const pdfBytes = await pdfDoc.save();
+    downloadjs(pdfBytes, "lean-pdf.pdf", "application/pdf");
+  };
 
-  render() {
-    return (
-      <div className="Editor sticky-top">
-        <Container fluid>
-          <h2>Editor</h2>
-          <hr/>
-          <PageRemover/>
-          <hr/>
-          <Outliner/>
-          <hr/>
-          <Button variant="primary" onClick={this.handleDownload}>
-            Download
-          </Button>
-        </Container>
-      </div>
-    );
-  }
+  return (
+    <div className="Editor sticky-top">
+      <Container fluid>
+        <h2>Editor</h2>
+        <hr/>
+        <PageRemover pdfDoc={pdfDoc} onPdfDocChange={onPdfDocChange}/>
+        <hr/>
+        <Outliner/>
+        <hr/>
+        <Button variant="primary" onClick={handleDownload}>
+          Download
+        </Button>
+      </Container>
+    </div>
+  );
 }
