@@ -6,7 +6,7 @@ import downloadjs from "downloadjs";
 import ModifyPDF from "../modify-page";
 
 import './Editor.scss';
-import PagesDeleter from "../pages-deleter/PagesDeleter";
+import PageRemover from "../page-remover/PageRemover";
 import Outliner from "../outliner/Outliner";
 
 export default class Editor extends Component {
@@ -22,7 +22,7 @@ export default class Editor extends Component {
         <Container fluid>
           <h2>Editor</h2>
           <hr/>
-          <PagesDeleter/>
+          <PageRemover/>
           <hr/>
           <Outliner/>
           <hr/>

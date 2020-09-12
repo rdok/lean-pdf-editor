@@ -4,7 +4,7 @@ import Editor from "./components/editor/Editor";
 import Container from 'react-bootstrap/Container';
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Navbar from "./components/navbar/navbar";
+import Navbar from "./components/navbar/Navbar";
 
 import './App.scss';
 
@@ -15,10 +15,8 @@ export default class App extends Component {
       <Navbar/>
       <Container fluid>
         <Row>
-          <PDFRenderer/>
-          <Col>
-            <Editor/>
-          </Col>
+          <Col><Editor/></Col>
+          <Col><PDFRenderer/></Col>
         </Row>
       </Container>
     </>;
