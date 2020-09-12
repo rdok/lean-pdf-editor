@@ -1,14 +1,19 @@
 name: Deployment
 on:
   push:
-    branches: 'master'
+    branches: [master, development]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - run: yarn
-      - run: yarn build
+      - name: Build react
+        run: |
+          OWNER=$(echo "${GITHUB_REPOSITORY}" | sed --expression 's/\/.*//g')
+          REPO=$(echo "${GITHUB_REPOSITORY}" | sed --expression 's/.*\///g')
+          export PUBLIC_URL="https://${OWNER}.github.io/${REPO}/"
+          yarn build
       - name: Publish
         uses: rdok/publish-gh-page-action@v1.0.3
         with:
