@@ -3,11 +3,12 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import React, { useState } from "react";
+import { PDFDocument } from 'pdf-lib';
 
-export default ({ pdfDoc, onPdfDocChange }) => {
+export default ({ file, onFileModified, pdfDoc, onPdfDocChange }) => {
   const [validated, setValidated] = useState(false);
-  const [startPage, setStartPage] = useState(1);
-  const [endPage, setEndPage] = useState(1);
+  const [startPage, setStartPage] = useState(0);
+  const [endPage, setEndPage] = useState(0);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -16,13 +17,21 @@ export default ({ pdfDoc, onPdfDocChange }) => {
     setValidated(true);
 
     if (formIsValid) {
-      let index = startPage - 1;
+      const pdfDoc = await PDFDocument.load(file.data);
+      console.log('pdfDoc loaded content')
+      let index = Number(startPage);
+      let maxPage = Number(endPage);
       do {
-        pdfDoc.removePage(index);
-        index++;
-      } while (startPage < endPage);
+        console.log('removing index', maxPage)
+        pdfDoc.removePage(maxPage);
+        maxPage--;
+      } while (index < maxPage);
 
-      onPdfDocChange(pdfDoc)
+      console.log('saving to base64')
+      const data = await pdfDoc.save();
+      onFileModified({data, totalPages: pdfDoc.getPageCount()})
+      // const newFile = {name: file.name, content: blob}
+      // this.setState({file: newFile})
     }
   };
 
@@ -41,7 +50,7 @@ export default ({ pdfDoc, onPdfDocChange }) => {
         <Col>
           <Form.Control
             type="number"
-            min="1"
+            min="0"
             placeholder="Page start"
             value={startPage}
             onChange={handlePageStartChange}
@@ -50,7 +59,7 @@ export default ({ pdfDoc, onPdfDocChange }) => {
         <Col>
           <Form.Control
             type="number"
-            min="1"
+            min="0"
             value={endPage}
             onChange={handlePageEndChange}
             placeholder="Page end"

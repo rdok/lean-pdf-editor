@@ -5,7 +5,7 @@ import downloadjs from "downloadjs";
 import './Editor.scss';
 import PageRemover from "../page-remover/PageRemover";
 
-export default ({ pdfDoc, onPdfDocChange, filename }) => {
+export default ({ file, onFileModified, pdfDoc, onPdfDocChange, filename }) => {
 
   const handleDownload = async (e) => {
     const pdfBytes = await pdfDoc.save();
@@ -16,7 +16,7 @@ export default ({ pdfDoc, onPdfDocChange, filename }) => {
     <div className="Editor sticky-top">
       <h2>Editor</h2>
       <hr/>
-      <PageRemover pdfDoc={pdfDoc} onPdfDocChange={onPdfDocChange}/>
+      <PageRemover file={file} onFileModified={onFileModified}/>
       <hr/>
       <hr/>
       <Button variant="primary" onClick={handleDownload}>

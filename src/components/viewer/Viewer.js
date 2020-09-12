@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Document, Outline, Page } from 'react-pdf/dist/umd/entry.webpack';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 
-import './PDFRenderer.scss';
+import './Viewer.scss';
 import Pagination from "../pagination/Pagination";
 
-export default class PDFRenderer extends Component {
+export default class Viewer extends Component {
   state = { numPages: null, pageNumber: 1 };
 
   constructor(props) {
@@ -42,6 +42,13 @@ export default class PDFRenderer extends Component {
   render() {
     const { numPages, pageNumber } = this.state;
     const { file } = this.props;
+    let data = null;
+
+    if (file.data instanceof Uint8Array) {
+      data = file.data.buffer;
+    } else {
+      data = file.data;
+    }
 
     return (
       <div>
@@ -53,10 +60,9 @@ export default class PDFRenderer extends Component {
         />
 
         <div
-          onScroll={this.handleScroll}
           className="PDFRenderer__container__document">
           <Document
-            file={file.content}
+            file={data}
             onLoadSuccess={this.onDocumentLoadSuccess}
           >
             <Outline onItemClick={this.onItemClick}/>
