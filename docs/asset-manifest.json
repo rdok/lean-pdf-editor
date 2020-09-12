@@ -1,28 +1,28 @@
 {
   "files": {
-    "main.css": "https://rdok.github.io/lean-pdf-editor/static/css/main.720d81d7.chunk.css",
-    "main.js": "https://rdok.github.io/lean-pdf-editor/static/js/main.2ed08a99.chunk.js",
-    "main.js.map": "https://rdok.github.io/lean-pdf-editor/static/js/main.2ed08a99.chunk.js.map",
-    "runtime-main.js": "https://rdok.github.io/lean-pdf-editor/static/js/runtime-main.6cb0c5c0.js",
-    "runtime-main.js.map": "https://rdok.github.io/lean-pdf-editor/static/js/runtime-main.6cb0c5c0.js.map",
-    "static/css/2.59815e44.chunk.css": "https://rdok.github.io/lean-pdf-editor/static/css/2.59815e44.chunk.css",
-    "static/js/2.e0f13d00.chunk.js": "https://rdok.github.io/lean-pdf-editor/static/js/2.e0f13d00.chunk.js",
-    "static/js/2.e0f13d00.chunk.js.map": "https://rdok.github.io/lean-pdf-editor/static/js/2.e0f13d00.chunk.js.map",
-    "index.html": "https://rdok.github.io/lean-pdf-editor/index.html",
-    "precache-manifest.2868381d0add765dff6d3a0d7be8b5a0.js": "https://rdok.github.io/lean-pdf-editor/precache-manifest.2868381d0add765dff6d3a0d7be8b5a0.js",
-    "service-worker.js": "https://rdok.github.io/lean-pdf-editor/service-worker.js",
-    "static/css/2.59815e44.chunk.css.map": "https://rdok.github.io/lean-pdf-editor/static/css/2.59815e44.chunk.css.map",
-    "static/css/main.720d81d7.chunk.css.map": "https://rdok.github.io/lean-pdf-editor/static/css/main.720d81d7.chunk.css.map",
-    "static/js/2.e0f13d00.chunk.js.LICENSE.txt": "https://rdok.github.io/lean-pdf-editor/static/js/2.e0f13d00.chunk.js.LICENSE.txt",
-    "static/js/pdf.worker.entry.0d620650.worker.js": "https://rdok.github.io/lean-pdf-editor/static/js/pdf.worker.entry.0d620650.worker.js",
-    "static/js/pdf.worker.entry.0d620650.worker.js.LICENSE.txt": "https://rdok.github.io/lean-pdf-editor/static/js/pdf.worker.entry.0d620650.worker.js.LICENSE.txt",
-    "static/js/pdf.worker.entry.0d620650.worker.js.map": "https://rdok.github.io/lean-pdf-editor/static/js/pdf.worker.entry.0d620650.worker.js.map"
+    "main.css": "/static/css/main.720d81d7.chunk.css",
+    "main.js": "/static/js/main.b21b9cb3.chunk.js",
+    "main.js.map": "/static/js/main.b21b9cb3.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.2de2cfa1.js",
+    "runtime-main.js.map": "/static/js/runtime-main.2de2cfa1.js.map",
+    "static/css/2.59815e44.chunk.css": "/static/css/2.59815e44.chunk.css",
+    "static/js/2.96f35b86.chunk.js": "/static/js/2.96f35b86.chunk.js",
+    "static/js/2.96f35b86.chunk.js.map": "/static/js/2.96f35b86.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.858458770c32b53e8491f302a1b1aeed.js": "/precache-manifest.858458770c32b53e8491f302a1b1aeed.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.59815e44.chunk.css.map": "/static/css/2.59815e44.chunk.css.map",
+    "static/css/main.720d81d7.chunk.css.map": "/static/css/main.720d81d7.chunk.css.map",
+    "static/js/2.96f35b86.chunk.js.LICENSE.txt": "/static/js/2.96f35b86.chunk.js.LICENSE.txt",
+    "static/js/pdf.worker.entry.e3f449a5.worker.js": "/static/js/pdf.worker.entry.e3f449a5.worker.js",
+    "static/js/pdf.worker.entry.e3f449a5.worker.js.LICENSE.txt": "/static/js/pdf.worker.entry.e3f449a5.worker.js.LICENSE.txt",
+    "static/js/pdf.worker.entry.e3f449a5.worker.js.map": "/static/js/pdf.worker.entry.e3f449a5.worker.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.6cb0c5c0.js",
+    "static/js/runtime-main.2de2cfa1.js",
     "static/css/2.59815e44.chunk.css",
-    "static/js/2.e0f13d00.chunk.js",
+    "static/js/2.96f35b86.chunk.js",
     "static/css/main.720d81d7.chunk.css",
-    "static/js/main.2ed08a99.chunk.js"
+    "static/js/main.b21b9cb3.chunk.js"
   ]
 }
