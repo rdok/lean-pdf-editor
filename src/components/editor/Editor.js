@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import downloadjs from "downloadjs";
@@ -7,8 +6,8 @@ import downloadjs from "downloadjs";
 import ModifyPDF from "../modify-page";
 
 import './Editor.scss';
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
+import PagesDeleter from "../pages-deleter/PagesDeleter";
+import Outliner from "../outliner/Outliner";
 
 export default class Editor extends Component {
 
@@ -21,21 +20,11 @@ export default class Editor extends Component {
     return (
       <div className="Editor sticky-top">
         <Container fluid>
-          <h3>Editor</h3>
+          <h2>Editor</h2>
           <hr/>
-          <Form>
-            <Form.Label>Delete pages</Form.Label>
-            <Row>
-              <Col>
-                <Form.Control type="number" min="0" placeholder="Page start"/>
-              </Col>
-              <Col>
-                <Form.Control type="number" min="0" placeholder="Page end"/>
-              </Col>
-            </Row>
-
-          </Form>
-
+          <PagesDeleter/>
+          <hr/>
+          <Outliner/>
           <hr/>
           <Button variant="primary" onClick={this.handleDownload}>
             Download
