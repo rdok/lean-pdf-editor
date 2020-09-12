@@ -1,0 +1,16 @@
+name: Deployment
+on:
+  push:
+    branches: 'master'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - run: yarn
+      - run: yarn build
+      - name: Publish
+        uses: rdok/publish-gh-page-action@v1.0.3
+        with:
+          directory: build
+          github-token: ${{ github.token }}
