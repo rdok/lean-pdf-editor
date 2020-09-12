@@ -10,7 +10,7 @@ jobs:
       - run: yarn
       - run: yarn build
       - name: Publish
-        uses: rdok/publish-gh-page-action@v1.0.3
+        uses: rdok/publish-gh-page-action@v1.2.1
         with:
           directory: build
           github-token: ${{ github.token }}
