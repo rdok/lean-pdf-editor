@@ -1,5 +1,4 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import downloadjs from "downloadjs";
 
@@ -16,17 +15,15 @@ export default ({ pdfDoc, onPdfDocChange }) => {
 
   return (
     <div className="Editor sticky-top">
-      <Container fluid>
-        <h2>Editor</h2>
-        <hr/>
-        <PageRemover pdfDoc={pdfDoc} onPdfDocChange={onPdfDocChange}/>
-        <hr/>
-        <Outliner/>
-        <hr/>
-        <Button variant="primary" onClick={handleDownload}>
-          Download
-        </Button>
-      </Container>
+      <h2>Editor</h2>
+      <hr/>
+      <PageRemover pdfDoc={pdfDoc} onPdfDocChange={onPdfDocChange}/>
+      <hr/>
+      <Outliner/>
+      <hr/>
+      <Button variant="primary" onClick={handleDownload}>
+        Download
+      </Button>
     </div>
   );
 }

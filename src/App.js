@@ -8,9 +8,11 @@ import './App.scss';
 import PDFRenderer from "./components/pdf-render/PDFRenderer";
 import Col from "react-bootstrap/Col";
 import Editor from "./components/editor/Editor";
+import File from "./components/file/File";
 
 export default class App extends React.Component {
   state = {
+    filename: './sample.pdf',
     pdf: null,
     pdfDoc: null,
   };
@@ -18,21 +20,34 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.handlePdfDocChange = this.handlePdfDocChange.bind(this);
+    this.handleFileChanged = this.handleFileChanged.bind(this);
   }
 
   async componentDidMount() {
-    const url = '/sample.pdf';
+    const url = this.state.filename;
     const file = await fetch(url).then(res => res.arrayBuffer());
     const pdfDoc = await PDFDocument.load(file);
-    const pdf = await pdfDoc.saveAsBase64({ dataUri: true })
-    this.setState({ pdf, pdfDoc });
+    const pdf = await pdfDoc.saveAsBase64({ dataUri: true });
+    const numPages = pdfDoc.getPageCount();
+    this.setState({ pdf, pdfDoc, numPages });
   }
-
 
   async handlePdfDocChange(pdfDoc) {
-    const pdf = await pdfDoc.saveAsBase64({ dataUri: true })
-    this.setState({ pdfDoc, pdf });
+    const pdf = await pdfDoc.saveAsBase64({ dataUri: true });
+    const numPages = pdfDoc.getPageCount();
+    this.setState({ pdfDoc, pdf, numPages });
   }
+
+  async handleFileChanged(e) {
+    const file = e.target.files[0];
+    const filename = file.name;
+    const contents = await file.arrayBuffer();
+    const pdfDoc = await PDFDocument.load(contents);
+    const pdf = await pdfDoc.saveAsBase64({ dataUri: true });
+    const numPages = pdfDoc.getPageCount();
+    this.setState({ pdf, pdfDoc, numPages, filename });
+  }
+
 
   render() {
     return <>
@@ -40,12 +55,20 @@ export default class App extends React.Component {
       <Container fluid>
         <Row>
           <Col>
-            <Editor
-              pdfDoc={this.state.pdfDoc}
-              onPdfDocChange={this.handlePdfDocChange}
+            <Container fluid>
+              <File filename={this.state.filename} onFileChanged={this.handleFileChanged}/>
+              <Editor
+                pdfDoc={this.state.pdfDoc}
+                onPdfDocChange={this.handlePdfDocChange}
+              />
+            </Container>
+          </Col>
+          <Col>
+            <PDFRenderer
+              pdf={this.state.pdf}
+              numPages={this.state.numPages}
             />
           </Col>
-          <Col><PDFRenderer pdf={this.state.pdf}/></Col>
         </Row>
       </Container>
     </>;
