@@ -15,16 +15,11 @@ export default class App extends Component {
       <Navbar/>
       <Container fluid>
         <Row>
-          <Col>
-            <PDFRenderer/>
-          </Col>
+          <PDFRenderer/>
           <Col>
             <Editor/>
           </Col>
         </Row>
-        {/*<header>*/}
-        {/*  <h1>Lean-PDF-Editor</h1>*/}
-        {/*</header>*/}
       </Container>
     </>;
   }
