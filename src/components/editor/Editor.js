@@ -4,13 +4,12 @@ import downloadjs from "downloadjs";
 
 import './Editor.scss';
 import PageRemover from "../page-remover/PageRemover";
-import Outliner from "../outliner/Outliner";
 
-export default ({ pdfDoc, onPdfDocChange }) => {
+export default ({ pdfDoc, onPdfDocChange, filename }) => {
 
   const handleDownload = async (e) => {
     const pdfBytes = await pdfDoc.save();
-    downloadjs(pdfBytes, "lean-pdf.pdf", "application/pdf");
+    downloadjs(pdfBytes, filename, "application/pdf");
   };
 
   return (
@@ -19,10 +18,9 @@ export default ({ pdfDoc, onPdfDocChange }) => {
       <hr/>
       <PageRemover pdfDoc={pdfDoc} onPdfDocChange={onPdfDocChange}/>
       <hr/>
-      <Outliner/>
       <hr/>
       <Button variant="primary" onClick={handleDownload}>
-        Download
+        Save
       </Button>
     </div>
   );

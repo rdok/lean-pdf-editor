@@ -29,7 +29,7 @@ export default class App extends React.Component {
     const pdfDoc = await PDFDocument.load(file);
     const pdf = await pdfDoc.saveAsBase64({ dataUri: true });
     const numPages = pdfDoc.getPageCount();
-    this.setState({ pdf, pdfDoc, numPages });
+    this.setState({  pdfDoc, pdf, numPages });
   }
 
   async handlePdfDocChange(pdfDoc) {
@@ -45,7 +45,7 @@ export default class App extends React.Component {
     const pdfDoc = await PDFDocument.load(contents);
     const pdf = await pdfDoc.saveAsBase64({ dataUri: true });
     const numPages = pdfDoc.getPageCount();
-    this.setState({ pdf, pdfDoc, numPages, filename });
+    this.setState({  pdfDoc, pdf, numPages, filename });
   }
 
 
@@ -60,6 +60,7 @@ export default class App extends React.Component {
               <Editor
                 pdfDoc={this.state.pdfDoc}
                 onPdfDocChange={this.handlePdfDocChange}
+                filename={this.state.filename}
               />
             </Container>
           </Col>
