@@ -1,18 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
+import Button from 'react-bootstrap/Button';
+import downloadjs from "downloadjs";
 
 import './Editor.scss';
+import PageRemover from "../page-remover/PageRemover";
 
-export default class Editor extends Component {
+export default ({ pdfDoc, onPdfDocChange, filename }) => {
 
-  render() {
-    return (
-      <div className="ActionsForm">
-        <div className="ActionsForm__container">
-          <form>
-            <input type="submit" value="Bookmark"/>
-          </form>
-        </div>
-      </div>
-    );
-  }
+  const handleDownload = async (e) => {
+    const pdfBytes = await pdfDoc.save();
+    downloadjs(pdfBytes, filename, "application/pdf");
+  };
+
+  return (
+    <div className="Editor sticky-top">
+      <h2>Editor</h2>
+      <hr/>
+      <PageRemover pdfDoc={pdfDoc} onPdfDocChange={onPdfDocChange}/>
+      <hr/>
+      <hr/>
+      <Button variant="primary" onClick={handleDownload}>
+        Save
+      </Button>
+    </div>
+  );
 }
