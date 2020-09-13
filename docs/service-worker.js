@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "https://rdok.github.io/lean-pdf-editor/precache-manifest.024b8dc19963a9af311f56c40500755f.js"
+  "https://rdok.github.io/lean-pdf-editor/precache-manifest.b39024d8d7ddda2b91ccd477e0ac230e.js"
 );
 
 self.addEventListener('message', (event) => {
