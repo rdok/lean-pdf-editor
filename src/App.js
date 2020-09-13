@@ -1,16 +1,18 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from "react-bootstrap/Row";
-import Navbar from "./components/navbar/Navbar";
-
-import './App.scss';
-import Viewer from "./components/viewer/Viewer";
+import { PDFDocument } from "pdf-lib";
 import Col from "react-bootstrap/Col";
+
+import Navbar from "./components/navbar/Navbar";
+import Viewer from "./components/viewer/Viewer";
 import Saver from "./components/saver/Saver";
 import File from "./components/file/File";
-import { PDFDocument } from "pdf-lib";
+
 import RangeRemover from "./components/range-remover/RangeRemover";
 import Outliner from "./components/outliner/Outliner";
+
+import './App.scss';
 
 const INITIAL_PAGE_NUMBER = 1;
 
@@ -76,9 +78,10 @@ export default class App extends React.Component {
     });
   }
 
-  handleOutlinerUpdated(e) {
-    console.log('handle handleOutlinerUpdated');
-    console.log(e.target.title.value);
+  handleOutlinerUpdated({ data }) {
+    const { file } = this.state;
+    file.data = data;
+    this.setState({ file });
   }
 
   handleViewUpdated({ pageNumber }) {
