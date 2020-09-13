@@ -2,15 +2,21 @@ import React, { Component } from 'react';
 import { Document, Outline, Page } from 'react-pdf/dist/umd/entry.webpack';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 
-import './Viewer.scss';
 import Pagination from "../pagination/Pagination";
+import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import ListGroup from "react-bootstrap/ListGroup";
+
+import './Viewer.scss';
 
 export default class Viewer extends Component {
   constructor(props) {
     super(props);
     this.goToPreviousPage = this.goToPreviousPage.bind(this);
     this.goToNextPage = this.goToNextPage.bind(this);
-    this.handlePageRangeChange = this.handlePageRangeChange.bind(this)
+    this.handlePageRangeChange = this.handlePageRangeChange.bind(this);
+    this.handleOutlineItemClicked = this.handleOutlineItemClicked.bind(this);
   }
 
   onDocumentLoadSuccess = ({ numPages }) => {
@@ -33,8 +39,12 @@ export default class Viewer extends Component {
   }
 
   handlePageRangeChange(e) {
-    const pageNumber = Number(e.target.value)
+    const pageNumber = Number(e.target.value);
     this.props.onViewUpdated({ pageNumber });
+  }
+
+  handleOutlineItemClicked(e) {
+   console.log(e)
   }
   render() {
     const { file } = this.props;
@@ -49,24 +59,33 @@ export default class Viewer extends Component {
 
     return (
       <div>
-        <Pagination
-          pageNumber={pageNumber}
-          numPages={numPages}
-          goToNextPage={this.goToNextPage}
-          goToPreviousPage={this.goToPreviousPage}
-          onPageRangeChange={this.handlePageRangeChange}
-        />
-
-        <div
-          className="PDFRenderer__container__document">
+        <Container fluid className="Viewer__container__document">
           <Document
             file={render}
             onLoadSuccess={this.onDocumentLoadSuccess}
           >
-            <Outline onItemClick={this.onItemClick}/>
-            <Page key={`page_${pageNumber}`} pageNumber={pageNumber}/>
+            <Row>
+              <Col md={4} sm={4}>
+                <h4>Outline</h4>
+                <ListGroup>
+                  <Outline onItemClick={this.handleOutlineItemClicked} className="list-group"/>
+                  <ListGroup.Item active>Cras justo odio</ListGroup.Item>
+                  <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+                </ListGroup>
+              </Col>
+              <Col md={8} sm={8}>
+                <Pagination
+                  pageNumber={pageNumber}
+                  numPages={numPages}
+                  goToNextPage={this.goToNextPage}
+                  goToPreviousPage={this.goToPreviousPage}
+                  onPageRangeChange={this.handlePageRangeChange}
+                />
+                <Page key={`page_${pageNumber}`} pageNumber={pageNumber}/>
+              </Col>
+            </Row>
           </Document>
-        </div>
+        </Container>
       </div>
     );
   }

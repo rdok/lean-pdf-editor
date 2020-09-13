@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import downloadjs from "downloadjs";
 
-import './Editor.scss';
-import PageRangeRemover from "../page-range-remover/PageRangeRemover";
+import './Saver.scss';
 import { PDFDocument } from "pdf-lib";
 
-export default ({ file, onPagesRemoval }) => {
+export default ({ file}) => {
   const [isProcessing, setProcessing] = useState(false);
 
   const handleDownload = async (e) => {
@@ -32,12 +31,7 @@ export default ({ file, onPagesRemoval }) => {
   };
 
   return (
-    <div className="Editor sticky-top">
-      <h2>Editor</h2>
-      <hr/>
-      <PageRangeRemover file={file} onPagesRemoval={onPagesRemoval}/>
-      <hr/>
-      <hr/>
+    <div className="Saver">
       <Button variant="primary" onClick={handleDownload} disabled={isProcessing}>
         {isProcessing ? 'Processing...' : 'Save'}
       </Button>
