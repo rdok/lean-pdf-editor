@@ -23,7 +23,7 @@ export default ({ file, onOutlinerUpdated }) => {
       setProcessing(true);
       const item = {
         index: file.pageNumber - 1,
-        title: form.title.value
+        title: String(form.title.value)
       };
       const data = await saver.addOutlineItem({ file, item });
       onOutlinerUpdated({ data });

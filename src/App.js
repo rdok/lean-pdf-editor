@@ -95,7 +95,7 @@ export default class App extends React.Component {
       <Navbar/>
       <Container fluid>
         <Row>
-          <Col md={3}>
+          <Col md={4}>
             <Container fluid className="sticky-top">
               <File file={this.state.file} onFileAttached={this.handleFileAttached}/>
               <RangeRemover file={this.state.file} onPagesRemoval={this.handlePagesRemoval}/>
@@ -103,7 +103,7 @@ export default class App extends React.Component {
               <Saver file={this.state.file}/>
             </Container>
           </Col>
-          <Col>
+          <Col md={8}>
             <Viewer file={this.state.file} onViewUpdated={this.handleViewUpdated}/>
           </Col>
         </Row>

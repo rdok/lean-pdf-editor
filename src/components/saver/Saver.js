@@ -3,20 +3,19 @@ import Button from 'react-bootstrap/Button';
 import downloadjs from "downloadjs";
 
 import './Saver.scss';
-import { PDFDocument } from "pdf-lib";
 import Saver from "../../services/Saver";
 
 const saver = new Saver();
 
-export default ({ file}) => {
+export default ({ file }) => {
   const [isProcessing, setProcessing] = useState(false);
 
   const handleDownload = async (e) => {
-    setProcessing(true)
+    setProcessing(true);
     const { name } = file;
-    const data = await saver.prepareDownload({file})
+    const data = await saver.prepareDownload({ file });
     downloadjs(data, name, "application/pdf");
-    setProcessing(false)
+    setProcessing(false);
   };
 
   return (

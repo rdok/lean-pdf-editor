@@ -71,6 +71,11 @@ export default class Saver {
     }
 
     const pdfDoc = await PDFDocument.load(file.data);
+
+    if (outline.length === 0) {
+      return await pdfDoc.save();
+    }
+
     const pageRefs = this.getPageRefs(pdfDoc);
     const outlinesDictRef = pdfDoc.context.nextRef();
     const refs = outline.map(() => pdfDoc.context.nextRef());
@@ -80,13 +85,13 @@ export default class Saver {
     outlinesDictMap.set(PDFName.Type, PDFName.of("Outlines"));
     outlinesDictMap.set(PDFName.of("First"), refs[0]);
     outlinesDictMap.set(PDFName.of("Last"), refs[refs.length - 1]);
-    outlinesDictMap.set(PDFName.of("Count"), PDFNumber.of(outlineItems.length));
+    outlinesDictMap.set(PDFName.of("Count"), PDFNumber.of(refs.length));
 
     pdfDoc.catalog.set(PDFName.of("Outlines"), outlinesDictRef);
     const outlinesDict = PDFDict.fromMapWithContext(outlinesDictMap, pdfDoc.context);
     pdfDoc.context.assign(outlinesDictRef, outlinesDict);
 
-    outlineItems.forEach((item, index) => {
+    refs.forEach((item, index) => {
       pdfDoc.context.assign(refs[index], outlineItems[index]);
     });
 
@@ -100,7 +105,7 @@ export default class Saver {
   };
 
   prepareDownload = async ({ file }) => {
-    const outline = await this.getCurrentOutline(file)
+    const outline = await this.getCurrentOutline(file);
 
     const inputPdf = await PDFDocument.load(file.data);
     const outputPdf = await PDFDocument.create();

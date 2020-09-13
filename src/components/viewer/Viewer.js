@@ -6,7 +6,6 @@ import Pagination from "../pagination/Pagination";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import ListGroup from "react-bootstrap/ListGroup";
 
 import './Viewer.scss';
 
@@ -43,9 +42,10 @@ export default class Viewer extends Component {
     this.props.onViewUpdated({ pageNumber });
   }
 
-  handleOutlineItemClicked(e) {
-   console.log(e)
+  handleOutlineItemClicked({ pageIndex, pageNumber }) {
+    this.props.onViewUpdated({ pageNumber });
   }
+
   render() {
     const { file } = this.props;
     const { numPages, pageNumber, data } = file;
@@ -66,12 +66,8 @@ export default class Viewer extends Component {
           >
             <Row>
               <Col md={4} sm={4}>
-                <h4>Outline</h4>
-                <ListGroup>
-                  <Outline onItemClick={this.handleOutlineItemClicked} className="list-group"/>
-                  <ListGroup.Item active>Cras justo odio</ListGroup.Item>
-                  <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                </ListGroup>
+                <h5>Outline</h5>
+                <Outline onItemClick={this.handleOutlineItemClicked} className="list-group"/>
               </Col>
               <Col md={8} sm={8}>
                 <Pagination
