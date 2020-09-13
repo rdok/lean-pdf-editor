@@ -8,57 +8,74 @@ import Viewer from "./components/viewer/Viewer";
 import Col from "react-bootstrap/Col";
 import Editor from "./components/editor/Editor";
 import File from "./components/file/File";
+import { PDFDocument } from "pdf-lib";
+
+const INITIAL_PAGE_NUMBER = 1;
 
 export default class App extends React.Component {
   state = {
-    file: { name: './sample.pdf', data: null },
-    pageNumber: null,
-    pdf: null,
-    pdfDoc: null,
+    file: {
+      name: './sample.pdf',
+      data: null,
+      numPages: null,
+      pageNumber: INITIAL_PAGE_NUMBER,
+    },
   };
 
   constructor(props) {
     super(props);
-    this.handlePdfDocChange = this.handlePdfDocChange.bind(this);
     this.handleFileAttached = this.handleFileAttached.bind(this);
-    this.handleFileModified = this.handleFileModified.bind(this);
+    this.handlePagesRemoval = this.handlePagesRemoval.bind(this);
+    this.handleViewUpdated = this.handleViewUpdated.bind(this);
   }
 
   async componentDidMount() {
     const { name } = this.state.file;
     const data = await fetch(name).then(res => res.arrayBuffer());
-
-    this.setState({ file: { name, data } });
-    // const pdfDoc = await PDFDocument.load(file);
-    // const pdf = await pdfDoc.saveAsBase64({ dataUri: true });
-    // const numPages = pdfDoc.getPageCount();
-    // this.setState({  pdfDoc, pdf, numPages });
-  }
-
-  async handlePdfDocChange(pdfDoc) {
-    // const pdf = await pdfDoc.saveAsBase64({ dataUri: true });
-    // const numPages = pdfDoc.getPageCount();
-    // this.setState({ pdfDoc, pdf, numPages });
+    const pdfDoc = await PDFDocument.load(data);
+    const numPages = pdfDoc.getPageCount();
+    this.setState({ file: { name, data, numPages, pageNumber: INITIAL_PAGE_NUMBER } });
   }
 
   async handleFileAttached(e) {
-    const newFile = e.target.files[0];
-    const name = newFile.name
-    const data = await newFile.arrayBuffer();
-    this.setState({ file: { name, data } });
-    // const filename = file.name;
-    // const contents = await file.arrayBuffer();
-    // const pdfDoc = await PDFDocument.load(contents);
-    // const pdf = await pdfDoc.saveAsBase64({ dataUri: true });
-    // const numPages = pdfDoc.getPageCount();
-    // this.setState({  pdfDoc, pdf, numPages, filename });
+    const file = e.target.files[0];
+    const name = file.name;
+    const data = await file.arrayBuffer();
+    const pdfDoc = await PDFDocument.load(data);
+    const numPages = pdfDoc.getPageCount();
+    const pageNumber = INITIAL_PAGE_NUMBER;
+
+    this.setState({ file: { name, data, pageNumber, numPages } });
   }
 
-  handleFileModified({ data, totalPages }) {
-    console.log(data);
-    const { name } = this.state.file;
-    const pageNumber = Math.min(totalPages, this.state.pageNumber);
-    this.setState({ file: { name, data }, pageNumber });
+  async handlePagesRemoval({ startIndex, endIndex }) {
+    const { name, data, pageNumber } = this.state.file;
+    const pdfDoc = await PDFDocument.load(data);
+
+    let index = startIndex;
+    let maxIndex = endIndex;
+    while (index <= maxIndex) {
+      pdfDoc.removePage(maxIndex);
+      maxIndex--;
+    }
+    const newData = await pdfDoc.save();
+    const totalPages = pdfDoc.getPageCount();
+    const newPageNumber = Math.min(totalPages, pageNumber);
+
+    this.setState({
+      file: {
+        name,
+        data: newData,
+        pageNumber: newPageNumber,
+        numPages: totalPages
+      },
+    });
+  }
+
+  handleViewUpdated({ pageNumber }) {
+    const { file } = this.state;
+    file.pageNumber = pageNumber;
+    this.setState({ file });
   }
 
   render() {
@@ -69,11 +86,14 @@ export default class App extends React.Component {
           <Col>
             <Container fluid className="sticky-top">
               <File file={this.state.file} onFileAttached={this.handleFileAttached}/>
-              <Editor file={this.state.file} onFileModified={this.handleFileModified}/>
+              <Editor
+                file={this.state.file}
+                onPagesRemoval={this.handlePagesRemoval}
+              />
             </Container>
           </Col>
           <Col>
-            <Viewer file={this.state.file} pageNumber={this.state.pageNumber}/>
+            <Viewer file={this.state.file} onViewUpdated={this.handleViewUpdated}/>
           </Col>
         </Row>
       </Container>
