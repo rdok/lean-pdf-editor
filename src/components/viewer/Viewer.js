@@ -10,6 +10,7 @@ export default class Viewer extends Component {
     super(props);
     this.goToPreviousPage = this.goToPreviousPage.bind(this);
     this.goToNextPage = this.goToNextPage.bind(this);
+    this.handlePageRangeChange = this.handlePageRangeChange.bind(this)
   }
 
   onDocumentLoadSuccess = ({ numPages }) => {
@@ -31,6 +32,10 @@ export default class Viewer extends Component {
     this.props.onViewUpdated({ pageNumber });
   }
 
+  handlePageRangeChange(e) {
+    const pageNumber = Number(e.target.value)
+    this.props.onViewUpdated({ pageNumber });
+  }
   render() {
     const { file } = this.props;
     const { numPages, pageNumber, data } = file;
@@ -49,6 +54,7 @@ export default class Viewer extends Component {
           numPages={numPages}
           goToNextPage={this.goToNextPage}
           goToPreviousPage={this.goToPreviousPage}
+          onPageRangeChange={this.handlePageRangeChange}
         />
 
         <div
