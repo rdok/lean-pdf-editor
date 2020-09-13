@@ -1,4 +1,6 @@
-.PDFRenderer {
+@import "node_modules/bootstrap/scss/bootstrap";
+
+.Viewer {
   input, button {
     font: inherit;
   }
@@ -21,6 +23,12 @@
           display: flex;
           flex-direction: column;
           align-items: flex-start;
+        }
+
+        &__Outline {
+          li {
+            //@extend .list-group-item;
+          }
         }
 
         &__Page {

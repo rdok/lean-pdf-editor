@@ -4,6 +4,8 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import React, { useState } from "react";
 
+import './RangeRemover.scss';
+
 export default ({ file, onPagesRemoval }) => {
   const [validated, setValidated] = useState(false);
   const [startPage, setStartPage] = useState(1);
@@ -36,8 +38,13 @@ export default ({ file, onPagesRemoval }) => {
   }
 
   return (
-    <Form noValidate validated={validated} onSubmit={handleSubmit}>
-      <h5>Remove pages</h5>
+    <Form
+      noValidate
+      validated={validated}
+      onSubmit={handleSubmit}
+      className="RangeRemover"
+    >
+      <h5>Range remover</h5>
       <Row>
         <Col>
           <Form.Control
@@ -47,7 +54,8 @@ export default ({ file, onPagesRemoval }) => {
             placeholder="Page start"
             value={startPage}
             onChange={handlePageStartChange}
-            required/>
+            required
+          />
         </Col>
         <Col>
           <Form.Control
@@ -57,7 +65,8 @@ export default ({ file, onPagesRemoval }) => {
             value={endPage}
             onChange={handlePageEndChange}
             placeholder="Page end"
-            required/>
+            required
+          />
         </Col>
         <Button variant="warning" type="submit" disabled={isProcessing}>
           {isProcessing ? 'Processing...' : 'Remove'}
