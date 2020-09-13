@@ -7,7 +7,7 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import Col from "react-bootstrap/Col";
 
 export default ({ pageNumber, numPages, goToPreviousPage, goToNextPage }) => {
-  const pageNumberLabel = <span>Page {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}</span>;
+  const pageNumberLabel = <span>Page {pageNumber  || (numPages ? 1 : '--')} of {numPages  || '--'}</span>;
   return (
     <div className="Pagination">
       <Container>
@@ -25,9 +25,8 @@ export default ({ pageNumber, numPages, goToPreviousPage, goToNextPage }) => {
               className="ProgressBar"
               variant="info"
               now={pageNumber / numPages * 100}
-              label={pageNumberLabel}
             />
-
+            {pageNumberLabel}
           </Col>
           <div>
           </div>

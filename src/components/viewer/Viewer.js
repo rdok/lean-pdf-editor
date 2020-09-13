@@ -6,19 +6,11 @@ import './Viewer.scss';
 import Pagination from "../pagination/Pagination";
 
 export default class Viewer extends Component {
-  state = { numPages: null, pageNumber: 1 };
-
   constructor(props) {
     super(props);
     this.goToPreviousPage = this.goToPreviousPage.bind(this);
     this.goToNextPage = this.goToNextPage.bind(this);
   }
-
-  onFileChange = (event) => {
-    // this.setState({
-    //   file: event.target.files[0],
-    // });
-  };
 
   onDocumentLoadSuccess = ({ numPages }) => {
     this.setState({ numPages });
@@ -30,24 +22,24 @@ export default class Viewer extends Component {
   }
 
   goToPreviousPage() {
-    const pageNumber = this.state.pageNumber - 1;
-    this.setState({ pageNumber });
+    const pageNumber = this.props.file.pageNumber - 1;
+    this.props.onViewUpdated({ pageNumber });
   }
 
   goToNextPage() {
-    const pageNumber = this.state.pageNumber + 1;
-    this.setState({ pageNumber });
+    const pageNumber = this.props.file.pageNumber + 1;
+    this.props.onViewUpdated({ pageNumber });
   }
 
   render() {
-    const { numPages, pageNumber } = this.state;
     const { file } = this.props;
-    let data = null;
+    const { numPages, pageNumber, data } = file;
+    let render;
 
-    if (file.data instanceof Uint8Array) {
-      data = file.data.buffer;
+    if (data instanceof Uint8Array) {
+      render = data.buffer;
     } else {
-      data = file.data;
+      render = data;
     }
 
     return (
@@ -62,7 +54,7 @@ export default class Viewer extends Component {
         <div
           className="PDFRenderer__container__document">
           <Document
-            file={data}
+            file={render}
             onLoadSuccess={this.onDocumentLoadSuccess}
           >
             <Outline onItemClick={this.onItemClick}/>

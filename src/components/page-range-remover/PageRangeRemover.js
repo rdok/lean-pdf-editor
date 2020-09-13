@@ -3,12 +3,12 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import React, { useState } from "react";
-import { PDFDocument } from 'pdf-lib';
 
-export default ({ file, onFileModified, pdfDoc, onPdfDocChange }) => {
+export default ({ file, onPagesRemoval }) => {
   const [validated, setValidated] = useState(false);
-  const [startPage, setStartPage] = useState(0);
-  const [endPage, setEndPage] = useState(0);
+  const [startPage, setStartPage] = useState(1);
+  const [endPage, setEndPage] = useState(1);
+  const [isProcessing, setProcessing] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -17,21 +17,13 @@ export default ({ file, onFileModified, pdfDoc, onPdfDocChange }) => {
     setValidated(true);
 
     if (formIsValid) {
-      const pdfDoc = await PDFDocument.load(file.data);
-      console.log('pdfDoc loaded content')
-      let index = Number(startPage);
-      let maxPage = Number(endPage);
-      do {
-        console.log('removing index', maxPage)
-        pdfDoc.removePage(maxPage);
-        maxPage--;
-      } while (index < maxPage);
-
-      console.log('saving to base64')
-      const data = await pdfDoc.save();
-      onFileModified({data, totalPages: pdfDoc.getPageCount()})
-      // const newFile = {name: file.name, content: blob}
-      // this.setState({file: newFile})
+      setProcessing(true);
+      const payload = {
+        startIndex: Number(startPage) - 1,
+        endIndex: Number(endPage) - 1
+      };
+      await onPagesRemoval(payload);
+      setProcessing(false);
     }
   };
 
@@ -50,7 +42,8 @@ export default ({ file, onFileModified, pdfDoc, onPdfDocChange }) => {
         <Col>
           <Form.Control
             type="number"
-            min="0"
+            min="1"
+            max={file.numPages}
             placeholder="Page start"
             value={startPage}
             onChange={handlePageStartChange}
@@ -59,14 +52,15 @@ export default ({ file, onFileModified, pdfDoc, onPdfDocChange }) => {
         <Col>
           <Form.Control
             type="number"
-            min="0"
+            min={startPage}
+            max={file.numPages}
             value={endPage}
             onChange={handlePageEndChange}
             placeholder="Page end"
             required/>
         </Col>
-        <Button variant="warning" type="submit">
-          Remove
+        <Button variant="warning" type="submit" disabled={isProcessing}>
+          {isProcessing ? 'Processing...' : 'Remove'}
         </Button>
       </Row>
     </Form>
