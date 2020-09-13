@@ -4,29 +4,18 @@ import downloadjs from "downloadjs";
 
 import './Saver.scss';
 import { PDFDocument } from "pdf-lib";
+import Saver from "../../services/Saver";
+
+const saver = new Saver();
 
 export default ({ file}) => {
   const [isProcessing, setProcessing] = useState(false);
 
   const handleDownload = async (e) => {
     setProcessing(true)
-    const { data, name } = file;
-    const inputPdf = await PDFDocument.load(data);
-
-    const outputPdf = await PDFDocument.create();
-
-    const copiedPages = await outputPdf.copyPages(
-      inputPdf,
-      inputPdf.getPageIndices(),
-    );
-
-    copiedPages.forEach( (page) => {
-      outputPdf.addPage(page)
-    })
-
-    const pdfBytes = await outputPdf.save();
-
-    downloadjs(pdfBytes, name, "application/pdf");
+    const { name } = file;
+    const data = await saver.prepareDownload({file})
+    downloadjs(data, name, "application/pdf");
     setProcessing(false)
   };
 
