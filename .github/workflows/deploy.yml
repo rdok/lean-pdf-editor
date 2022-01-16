@@ -22,7 +22,7 @@ jobs:
           OWNER=$(echo "${GITHUB_REPOSITORY}" | sed --expression 's/\/.*//g')
           REPO=$(echo "${GITHUB_REPOSITORY}" | sed --expression 's/.*\///g')
           export PUBLIC_URL="https://${OWNER}.github.io/${REPO}/"
-          yarn build
+          yarn run build
       - name: Publish app
         uses: rdok/publish-gh-page-action@v1.2.2
         with:
