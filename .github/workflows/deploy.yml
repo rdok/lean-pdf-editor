@@ -1,13 +1,22 @@
-name: Deployment
+name: Deploy
 on:
   push:
-    branches: master
+    branches: [main]
 jobs:
-  build:
+  check:
+    uses: rdok/lean-pdf-editor/.github/workflows/check.yml@main
+  deploy:
+    environment: { name: "production" }
+    concurrency: "production"
+    needs: [check]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: yarn
+      - name: Setup Node with cache
+        uses: actions/setup-node@v2
+        with: { node-version: "14", cache: "yarn" }
+      - name: Install Yarn packages
+        run: yarn install --frozen-lockfile
       - name: Build app
         run: |
           OWNER=$(echo "${GITHUB_REPOSITORY}" | sed --expression 's/\/.*//g')
