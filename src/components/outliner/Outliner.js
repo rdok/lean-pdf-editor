@@ -4,8 +4,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 
-import './Outliner.scss';
-import Saver from '../../services/Saver';
+import "./Outliner.scss";
+import Saver from "../../services/Saver";
 
 const saver = new Saver();
 
@@ -23,7 +23,7 @@ export default ({ file, onOutlinerUpdated }) => {
       setProcessing(true);
       const item = {
         index: file.pageNumber - 1,
-        title: String(form.title.value)
+        title: String(form.title.value),
       };
       const data = await saver.addOutlineItem({ file, item });
       onOutlinerUpdated({ data });
@@ -41,12 +41,18 @@ export default ({ file, onOutlinerUpdated }) => {
       <h5>Bookmark</h5>
       <Row>
         <Col>
-          <Form.Control name="title" type="text" placeholder="Title" defaultValue="test" required/>
+          <Form.Control
+            name="title"
+            type="text"
+            placeholder="Title"
+            defaultValue="test"
+            required
+          />
         </Col>
         <Button variant="warning" type="submit">
-          {isProcessing ? 'Processing...' : 'Apply'}
+          {isProcessing ? "Processing..." : "Apply"}
         </Button>
       </Row>
     </Form>
   );
-}
+};

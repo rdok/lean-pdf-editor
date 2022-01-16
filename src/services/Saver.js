@@ -1,11 +1,19 @@
 import { pdfjs } from "react-pdf/dist/umd/entry.webpack";
-import { PDFArray, PDFDict, PDFDocument, PDFName, PDFNull, PDFNumber, PDFPageLeaf, PDFString } from "pdf-lib";
+import {
+  PDFArray,
+  PDFDict,
+  PDFDocument,
+  PDFName,
+  PDFNull,
+  PDFNumber,
+  PDFPageLeaf,
+  PDFString,
+} from "pdf-lib";
 
 export default class Saver {
-
   getCurrentOutline = async (file) => {
     const pdf = await pdfjs.getDocument({ data: file.data }).promise;
-    const outline = await pdf.getOutline() ?? [];
+    const outline = (await pdf.getOutline()) ?? [];
     return outline.map((title, index) => {
       return { index, title: title.title };
     });
@@ -19,8 +27,14 @@ export default class Saver {
     return refs;
   };
 
-
-  createOutlineItem = (pdfDoc, title, parent, nextOrPrev, page, isLast = false) => {
+  createOutlineItem = (
+    pdfDoc,
+    title,
+    parent,
+    nextOrPrev,
+    page,
+    isLast = false
+  ) => {
     let array = PDFArray.withContext(pdfDoc.context);
     array.push(page);
     array.push(PDFName.of("XYZ"));
@@ -36,7 +50,6 @@ export default class Saver {
     return PDFDict.fromMapWithContext(map, pdfDoc.context);
   };
 
-
   normalizeNewOutline = async ({ file, item }) => {
     let newOutline = await this.getCurrentOutline(file);
     newOutline[item.index] = item;
@@ -45,7 +58,7 @@ export default class Saver {
 
   createOutlineItems = (outline, refs, pdfDoc, outlinesDictRef, pageRefs) => {
     return outline.map(({ index, title }) => {
-      const isLast = typeof outline[index + 1] === 'undefined';
+      const isLast = typeof outline[index + 1] === "undefined";
       let nextOrPrev;
       if (isLast) {
         const refIndex = index === 0 ? 0 : index - 1;
@@ -79,7 +92,13 @@ export default class Saver {
     const pageRefs = this.getPageRefs(pdfDoc);
     const outlinesDictRef = pdfDoc.context.nextRef();
     const refs = outline.map(() => pdfDoc.context.nextRef());
-    const outlineItems = this.createOutlineItems(outline, refs, pdfDoc, outlinesDictRef, pageRefs);
+    const outlineItems = this.createOutlineItems(
+      outline,
+      refs,
+      pdfDoc,
+      outlinesDictRef,
+      pageRefs
+    );
 
     const outlinesDictMap = new Map();
     outlinesDictMap.set(PDFName.Type, PDFName.of("Outlines"));
@@ -88,7 +107,10 @@ export default class Saver {
     outlinesDictMap.set(PDFName.of("Count"), PDFNumber.of(refs.length));
 
     pdfDoc.catalog.set(PDFName.of("Outlines"), outlinesDictRef);
-    const outlinesDict = PDFDict.fromMapWithContext(outlinesDictMap, pdfDoc.context);
+    const outlinesDict = PDFDict.fromMapWithContext(
+      outlinesDictMap,
+      pdfDoc.context
+    );
     pdfDoc.context.assign(outlinesDictRef, outlinesDict);
 
     refs.forEach((item, index) => {
@@ -111,7 +133,7 @@ export default class Saver {
     const outputPdf = await PDFDocument.create();
     const copiedPages = await outputPdf.copyPages(
       inputPdf,
-      inputPdf.getPageIndices(),
+      inputPdf.getPageIndices()
     );
 
     copiedPages.forEach((page) => {

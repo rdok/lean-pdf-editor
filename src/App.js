@@ -1,5 +1,5 @@
-import React from 'react';
-import Container from 'react-bootstrap/Container';
+import React from "react";
+import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import { PDFDocument } from "pdf-lib";
 import Col from "react-bootstrap/Col";
@@ -12,18 +12,18 @@ import File from "./components/file/File";
 import RangeRemover from "./components/range-remover/RangeRemover";
 import Outliner from "./components/outliner/Outliner";
 
-import './App.scss';
+import "./App.scss";
 
 const INITIAL_PAGE_NUMBER = 1;
 
 export default class App extends React.Component {
   state = {
     file: {
-      name: './sample.pdf',
+      name: "./sample.pdf",
       data: null,
       numPages: null,
       pageNumber: INITIAL_PAGE_NUMBER,
-      minPage: 0
+      minPage: 0,
     },
   };
 
@@ -37,10 +37,12 @@ export default class App extends React.Component {
 
   async componentDidMount() {
     const { name } = this.state.file;
-    const data = await fetch(name).then(res => res.arrayBuffer());
+    const data = await fetch(name).then((res) => res.arrayBuffer());
     const pdfDoc = await PDFDocument.load(data);
     const numPages = pdfDoc.getPageCount();
-    this.setState({ file: { name, data, numPages, pageNumber: INITIAL_PAGE_NUMBER } });
+    this.setState({
+      file: { name, data, numPages, pageNumber: INITIAL_PAGE_NUMBER },
+    });
   }
 
   async handleFileAttached(e) {
@@ -73,7 +75,7 @@ export default class App extends React.Component {
         name,
         data: newData,
         pageNumber: newPageNumber,
-        numPages: totalPages
+        numPages: totalPages,
       },
     });
   }
@@ -91,23 +93,37 @@ export default class App extends React.Component {
   }
 
   render() {
-    return <div>
-      <Navbar/>
-      <Container fluid>
-        <Row>
-          <Col md={4}>
-            <Container fluid className="sticky-top">
-              <File file={this.state.file} onFileAttached={this.handleFileAttached}/>
-              <RangeRemover file={this.state.file} onPagesRemoval={this.handlePagesRemoval}/>
-              <Outliner file={this.state.file} onOutlinerUpdated={this.handleOutlinerUpdated}/>
-              <Saver file={this.state.file}/>
-            </Container>
-          </Col>
-          <Col md={8}>
-            <Viewer file={this.state.file} onViewUpdated={this.handleViewUpdated}/>
-          </Col>
-        </Row>
-      </Container>
-    </div>;
+    return (
+      <div>
+        <Navbar />
+        <Container fluid>
+          <Row>
+            <Col md={4}>
+              <Container fluid className="sticky-top">
+                <File
+                  file={this.state.file}
+                  onFileAttached={this.handleFileAttached}
+                />
+                <RangeRemover
+                  file={this.state.file}
+                  onPagesRemoval={this.handlePagesRemoval}
+                />
+                <Outliner
+                  file={this.state.file}
+                  onOutlinerUpdated={this.handleOutlinerUpdated}
+                />
+                <Saver file={this.state.file} />
+              </Container>
+            </Col>
+            <Col md={8}>
+              <Viewer
+                file={this.state.file}
+                onViewUpdated={this.handleViewUpdated}
+              />
+            </Col>
+          </Row>
+        </Container>
+      </div>
+    );
   }
 }

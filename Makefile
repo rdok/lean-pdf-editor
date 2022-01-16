@@ -8,3 +8,5 @@ ci.lint:
 	CI=true npx eslint src
 ci.build:
 
+prettier:
+	npx prettier --write .

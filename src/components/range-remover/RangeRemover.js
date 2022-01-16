@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import React, { useState } from "react";
 
-import './RangeRemover.scss';
+import "./RangeRemover.scss";
 
 export default ({ file, onPagesRemoval }) => {
   const [validated, setValidated] = useState(false);
@@ -22,7 +22,7 @@ export default ({ file, onPagesRemoval }) => {
       setProcessing(true);
       const payload = {
         startIndex: Number(startPage) - 1,
-        endIndex: Number(endPage) - 1
+        endIndex: Number(endPage) - 1,
       };
       await onPagesRemoval(payload);
       setProcessing(false);
@@ -69,9 +69,9 @@ export default ({ file, onPagesRemoval }) => {
           />
         </Col>
         <Button variant="warning" type="submit" disabled={isProcessing}>
-          {isProcessing ? 'Processing...' : 'Remove'}
+          {isProcessing ? "Processing..." : "Remove"}
         </Button>
       </Row>
     </Form>
   );
-}
+};

@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { Document, Outline, Page } from 'react-pdf/dist/umd/entry.webpack';
-import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import React, { Component } from "react";
+import { Document, Outline, Page } from "react-pdf/dist/umd/entry.webpack";
+import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 
 import Pagination from "../pagination/Pagination";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
-import './Viewer.scss';
+import "./Viewer.scss";
 
 export default class Viewer extends Component {
   constructor(props) {
@@ -21,7 +21,6 @@ export default class Viewer extends Component {
   onDocumentLoadSuccess = ({ numPages }) => {
     this.setState({ numPages });
   };
-
 
   onItemClick({ pageNumber }) {
     this.setState({ pageNumber });
@@ -60,14 +59,14 @@ export default class Viewer extends Component {
     return (
       <div>
         <Container fluid className="Viewer__container__document">
-          <Document
-            file={render}
-            onLoadSuccess={this.onDocumentLoadSuccess}
-          >
+          <Document file={render} onLoadSuccess={this.onDocumentLoadSuccess}>
             <Row>
               <Col md={4} sm={4}>
                 <h5>Outline</h5>
-                <Outline onItemClick={this.handleOutlineItemClicked} className="list-group"/>
+                <Outline
+                  onItemClick={this.handleOutlineItemClicked}
+                  className="list-group"
+                />
               </Col>
               <Col md={8} sm={8}>
                 <Pagination
@@ -77,7 +76,7 @@ export default class Viewer extends Component {
                   goToPreviousPage={this.goToPreviousPage}
                   onPageRangeChange={this.handlePageRangeChange}
                 />
-                <Page key={`page_${pageNumber}`} pageNumber={pageNumber}/>
+                <Page key={`page_${pageNumber}`} pageNumber={pageNumber} />
               </Col>
             </Row>
           </Document>

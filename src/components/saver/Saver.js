@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
+import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
 import downloadjs from "downloadjs";
 
-import './Saver.scss';
+import "./Saver.scss";
 import Saver from "../../services/Saver";
 
 const saver = new Saver();
@@ -20,9 +20,13 @@ export default ({ file }) => {
 
   return (
     <div className="Saver">
-      <Button variant="primary" onClick={handleDownload} disabled={isProcessing}>
-        {isProcessing ? 'Processing...' : 'Save'}
+      <Button
+        variant="primary"
+        onClick={handleDownload}
+        disabled={isProcessing}
+      >
+        {isProcessing ? "Processing..." : "Save"}
       </Button>
     </div>
   );
-}
+};
